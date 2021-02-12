@@ -1,4 +1,4 @@
-package lucy.com.dao;
+package lucy.com.repo;
 
 import java.util.*;
 

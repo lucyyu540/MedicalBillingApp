@@ -32,7 +32,7 @@ public class PersonController {
 		return this.personService.getAllPeople();
 	}
 	@GetMapping(path = "id={id}")
-	public Person getPersonById(@PathVariable("id") Long id) {
+	public Person getPersonById(@PathVariable("id") long id) {
 		return this.personService.getPersonById(id);
 	}
 	@GetMapping(path = "name={name}")

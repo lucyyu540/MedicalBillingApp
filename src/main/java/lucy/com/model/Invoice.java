@@ -5,6 +5,8 @@ import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 public class Invoice {
 	@Id
@@ -19,7 +21,12 @@ public class Invoice {
 	private int paid;//누적실제수납 
 	private boolean clear; 
 	public Invoice() {}
-	public Invoice(long pid, String pName, int total, String type, String department) {
+	public Invoice(
+			@JsonProperty("pid") long pid, 
+			@JsonProperty("pName") String pName, 
+			@JsonProperty("total") int total, 
+			@JsonProperty("type") String type, 
+			@JsonProperty("department") String department) {
 		this.setPid(pid);
 		this.setpName(pName);
 		this.setDate(new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()));

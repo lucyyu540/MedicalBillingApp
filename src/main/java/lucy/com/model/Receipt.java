@@ -5,6 +5,8 @@ import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 public class Receipt {
 	@Id
@@ -16,7 +18,10 @@ public class Receipt {
 	private int refunded;//환불액 
 	/*CONSTRUCTORS*/
 	public Receipt() {}
-	public Receipt(long pid, long iid, int amount) {
+	public Receipt(
+			@JsonProperty("pid") long pid, 
+			@JsonProperty("iid") long iid, 
+			@JsonProperty("amount") int amount) {
 		this.setPid(pid);
 		this.setIid(iid);
 		this.setDate(new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()));
