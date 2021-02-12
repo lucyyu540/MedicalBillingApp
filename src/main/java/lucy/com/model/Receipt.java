@@ -5,15 +5,19 @@ import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 public class Receipt {
 	@Id
 	private Long id;
+	@NotBlank
 	private Long pid;//환저등록번호 
+	@NotBlank
 	private Long Iid;//invoice등록번호 
 	private String date;
+	@NotBlank
 	private int amount;//수납액 
 	private int refunded;//환불액 
 	/*CONSTRUCTORS*/

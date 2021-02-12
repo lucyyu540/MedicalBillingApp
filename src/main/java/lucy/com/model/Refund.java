@@ -5,19 +5,32 @@ import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 public class Refund {
 	@Id
 	private Long id;
 	private Long pid;//환자등록번호
+	@NotBlank
 	private Long rid;//수납등록번호 
 	private String date;
+	@NotBlank
 	private int cash;
+	@NotBlank
 	private int credit;
+	@NotBlank
 	private int transfer;
+	@NotBlank
 	private int total;
 	public Refund() {}
-	public Refund(long pid, long rid, int cash, int credit, int transfer) {
+	public Refund(
+			@JsonProperty("pid")long pid, 
+			@JsonProperty("rid")long rid, 
+			@JsonProperty("cash")int cash, 
+			@JsonProperty("credit")int credit, 
+			@JsonProperty("transfer")int transfer) {
 		this.setPid(pid);
 		this.setRid(rid);
 		this.setDate(new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()));

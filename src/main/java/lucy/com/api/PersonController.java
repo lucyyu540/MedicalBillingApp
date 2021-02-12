@@ -39,12 +39,13 @@ public class PersonController {
 	public Iterable<Person> getPeopleByName(@PathVariable("name") String name) {
 		return this.personService.getPeopleByName(name);
 	}
-	@DeleteMapping(path = "{id}")
-	public void deletePersonById(@PathVariable("id") Long id) {
-		this.personService.deletePersonById(id);
-	}
 	@PutMapping(path = "{id}")
 	public void updatePerson(@PathVariable("id") Long id, @RequestBody @Valid @NonNull Person p) {
 		this.personService.updatePersonById(id, p);
 	}
+	@DeleteMapping(path = "{id}")
+	public void deletePersonById(@PathVariable("id") Long id) {
+		this.personService.deletePersonById(id);
+	}
+	
 }
