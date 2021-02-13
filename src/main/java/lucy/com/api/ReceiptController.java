@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lucy.com.model.Invoice;
 import lucy.com.model.Receipt;
 import lucy.com.service.ReceiptService;
 import lucy.com.service.MainService;
@@ -29,6 +30,10 @@ public class ReceiptController {
 	@PostMapping
 	public void addReceipt(@RequestBody @Valid @NonNull Receipt r) {
 		this.mainService.addReceipt(r);
+	}
+	@GetMapping
+	public Iterable<Receipt> getAllReceipts() {
+		return this.receiptService.getAllReceipts();
 	}
 	@GetMapping(path = "pid={pid}")
 	public Iterable<Object> getReceiptsByPid(@PathVariable("pid") long pid) {

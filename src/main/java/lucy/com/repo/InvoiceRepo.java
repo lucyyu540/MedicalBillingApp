@@ -12,6 +12,8 @@ public interface InvoiceRepo extends CrudRepository<Invoice, Long>  {
 	//@Query(value = "", nativeQuery = true)
 	@Query("SELECT i FROM Invoice i WHERE i.pid = ?1 AND i.clear=FAlSE")
 	public Iterable<Invoice> getUnclearedInvoicesByPid(long pid);
+	@Query("SELECT i FROM Invoice i WHERE i.clear=FAlSE")
+	public Iterable<Invoice> getAllUnclearedInvoices();
 
 }
 

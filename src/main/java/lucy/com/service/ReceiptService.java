@@ -28,6 +28,9 @@ public class ReceiptService {
 	public Receipt getReceiptById(long id) {
 		return this.receiptRepo.findById(id).orElse(null);
 	}
+	public Iterable<Receipt> getAllReceipts() {
+		return this.receiptRepo.findAll();
+	}
 	public Iterable<Receipt> getReceiptsByPid(long pid) {
 		return this.receiptRepo.getReceiptsByPid(pid);
 	}

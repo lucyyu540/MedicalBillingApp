@@ -6,6 +6,7 @@ import java.util.Calendar;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
@@ -13,16 +14,15 @@ public class Refund {
 	@Id
 	private Long id;
 	private Long pid;//환자등록번호
-	@NotBlank
+	@NotNull(message= "receipt no. must not be empty")
 	private Long rid;//수납등록번호 
 	private String date;
-	@NotBlank
+	@NotNull(message= "cash input must not be empty")
 	private int cash;
-	@NotBlank
+	@NotNull(message= "credit input must not be empty")
 	private int credit;
-	@NotBlank
+	@NotNull(message= "transfer input must not be empty")
 	private int transfer;
-	@NotBlank
 	private int total;
 	public Refund() {}
 	public Refund(

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lucy.com.model.Invoice;
+import lucy.com.model.Person;
 import lucy.com.service.InvoiceService;
 @RequestMapping("api/v1/invoice")
 @RestController
@@ -27,17 +28,21 @@ public class InvoiceController {
 	public void addInvoice(@RequestBody @Valid @NonNull Invoice i) {
 		this.invoiceService.addInvoice(i);
 	}
-	@GetMapping(path = "pid={pid}")
+	@GetMapping
+	public Iterable<Invoice> getAllInvoices() {
+		return this.invoiceService.getAllInvoices();
+	}
+	@GetMapping(path = "uncleared")
+	public Iterable<Invoice> getAllUnclearedInvoices() {
+		return this.invoiceService.getAllUnclearedInvoices();
+	}
+	@GetMapping(path = "/uncleared/pid={pid}")
 	public Iterable<Invoice> getUnclearedInvoicesByPid(@PathVariable("pid") long pid) {
 		return this.invoiceService.getUnclearedInvoicesByPid(pid);
 	}
 	@GetMapping(path = "id={id}")
 	public Invoice getInvoiceById(@PathVariable("id") long id) {
 		return this.invoiceService.getInvoiceById(id);
-	}
-	@PutMapping(path = "{id}/{amount}")
-	public void receivePayment(@PathVariable("id") Long id, @PathVariable("amount") int amount) {
-		this.invoiceService.updatePaidById(id,amount);
 	}
 
 }

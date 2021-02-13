@@ -27,6 +27,12 @@ public class InvoiceService {
 	public Invoice getInvoiceById(long id) {
 		return this.invoiceRepo.findById(id).orElse(null);
 	}
+	public Iterable<Invoice> getAllInvoices() {
+		return this.invoiceRepo.findAll();
+	}
+	public Iterable<Invoice> getAllUnclearedInvoices() {
+		return this.invoiceRepo.getAllUnclearedInvoices();
+	}
 	public Iterable<Invoice> getUnclearedInvoicesByPid(long pid) {
 		return this.invoiceRepo.getUnclearedInvoicesByPid(pid);
 	}

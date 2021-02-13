@@ -37,5 +37,8 @@ public class RefundService {
 		obj.put("refundCredit", ref.getCredit());
 		obj.put("refundTransfer", ref.getTransfer());
 	}
+	public Iterable<Refund> getAllRefunds() {
+		return this.refundRepo.findAll();
+	}
 	
 }

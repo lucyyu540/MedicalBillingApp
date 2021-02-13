@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lucy.com.model.Receipt;
 import lucy.com.model.Refund;
 import lucy.com.service.RefundService;
 import lucy.com.service.MainService;
@@ -29,6 +30,10 @@ public class RefundController {
 	@PostMapping
 	public void addRefund(@RequestBody @Valid @NonNull Refund r) {
 		this.mainService.addRefund(r);
+	}
+	@GetMapping
+	public Iterable<Refund> getAllRefunds() {
+		return this.refundService.getAllRefunds();
 	}
 	@GetMapping(path = "rid={rid}")
 	public Iterable<Object> getReceiptsByPid(@PathVariable("rid") long pid) {

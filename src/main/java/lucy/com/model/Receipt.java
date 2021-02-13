@@ -6,19 +6,20 @@ import java.util.Calendar;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 public class Receipt {
 	@Id
 	private Long id;
-	@NotBlank
+	@NotNull(message= "patient id no. must not be empty")
 	private Long pid;//환저등록번호 
-	@NotBlank
+	@NotNull(message= "invoice no. must not be empty")
 	private Long Iid;//invoice등록번호 
 	private String date;
-	@NotBlank
-	private int amount;//수납액 
+	@NotNull(message= "amount must not be empty")
+	private Integer amount;//수납액 
 	private int refunded;//환불액 
 	/*CONSTRUCTORS*/
 	public Receipt() {}
