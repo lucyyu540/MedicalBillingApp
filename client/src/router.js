@@ -11,9 +11,9 @@ export default new Router ({
             component: () => import("./components/AddPerson")
         },
         {
-            path: "/invoice",
-            name: "invoice",
-            component: () => import("./components/Invoice")
+            path: "/invoice/add",
+            name: "invoice-add",
+            component: () => import("./components/AddInvoice")
         },
         {
             path: "/receipt/add",

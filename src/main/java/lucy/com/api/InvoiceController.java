@@ -24,7 +24,7 @@ public class InvoiceController {
 	public InvoiceController(InvoiceService s) {
 		this.invoiceService = s;
 	}
-	@PostMapping(path = "add")
+	@PostMapping
 	public void addInvoice(@RequestBody @Valid @NonNull Invoice i) {
 		this.invoiceService.addInvoice(i);
 	}
