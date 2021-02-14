@@ -32,5 +32,13 @@ public class RefundService {
 	public Iterable<Refund> getAllRefunds() {
 		return this.refundRepo.findAll();
 	}
+	/*UPDATE*/ 
+	public Refund updateCancelledTotal(long id, int amount) {
+		Refund r = this.getRefundById(id);
+		if(r==null || r.getTotal() - r.getCancelledTotal() < amount) return null;
+		r.setCancelledTotal(r.getCancelledTotal()+amount);
+		this.refundRepo.save(r);
+		return r;
+	}
 	
 }

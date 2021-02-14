@@ -35,14 +35,17 @@ public class ReceiptService {
 		return this.receiptRepo.getReceiptsByPid(pid);
 	}
 	/*UPDATE*/
-	public void updateRefundedById(Long id, int amount) {
+	public boolean updateRefundedById(Long id, int amount) {
 		try {
 			Receipt r = this.getReceiptById(id);
-			if(r.getAmount() < amount) throw new Exception("Refund total exceeds receipt");
-			r.setRefunded(amount);
+			if(r.getAmount()-r.getRefunded() < amount) throw new Exception("Refund total exceeds receipt");
+			r.setRefunded(r.getRefunded()+amount);
+			this.receiptRepo.save(r);
+			return true;
 		}
 		catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage()+" receipt id:" + id);
+			return false;
 		}
 		
 	}

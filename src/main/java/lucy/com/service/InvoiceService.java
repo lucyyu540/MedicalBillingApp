@@ -44,16 +44,18 @@ public class InvoiceService {
 		obj.put("paid", i.getPaid());//총수납액 
 	}
 	/*UPDATE*/
-	public void updatePaidById(Long id, int amount) {
+	public boolean updatePaidById(Long id, int amount) {
 		try {
 			Invoice inv = this.invoiceRepo.findById(id).get();
 			if(amount>inv.getOutOfPocket()) throw new Exception("Overpayment");
 			inv.setPaid(inv.getPaid()+amount);
 			if(inv.getPaid() == inv.getOutOfPocket()) inv.setClear(true);
 			this.invoiceRepo.save(inv);
+			return true;
 		}
 		catch(Exception e) {
 			System.out.println(e.getMessage());
+			return false;
 		}
 	}
 	public void deleteInvoiceById(Long id) {

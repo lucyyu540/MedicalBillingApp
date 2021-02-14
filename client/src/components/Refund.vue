@@ -1,7 +1,7 @@
 <template>
     <div>
         <receipt-search v-on:select="selectReceipt"></receipt-search>
-        <ul class="list-group" v-if="receipt && receipt.refunded>0" >
+        <ul class="list-group padding" v-if="receipt && receipt.refunded>0" >
           <h5 class="card-title">환불 내역</h5>
           <div class = "row">
               <div class = "col-1">id</div>
@@ -22,11 +22,12 @@
                       <div class = "col">₩{{ r.cash }}</div>
                       <div class = "col">₩{{ r.credit }}</div>
                       <div class = "col">₩{{r.transfer }}</div>
+                      <button class="btn btn-primary" type="button">재수납</button>
                   </div>
               </li>
-              <button class="btn btn-primary" type="button">재수납</button>
+              
           </ul>
-          <div v-else class="d-grid gap-2">
+          <div v-else-if="receipt && receipt.refunded==0" class="d-grid gap-2">
             <button class="btn btn-primary" type="button">환불</button>
           </div>
   </div>
@@ -104,8 +105,7 @@ export default {
 </script>
 
 <style>
-.submit-form {
-  max-width: 300px;
-  margin: auto;
+.padding{
+  padding-top: 50px;
 }
 </style>

@@ -30,18 +30,33 @@ public class MainService {
 		this.personService = personService;
 		this.refundService = refundService;
 	}
+	/*CREATE*/
 	public void addRefund(@Valid Refund r) {
-		//create refund invoice
-		long iid = this.invoiceService.addInvoice(new Invoice(r.getPid(), r.getTotal()));
-		r.setIid(iid);
 		//match to receipt
-		this.receiptService.updateRefundedById(r.getRid(), r.getTotal());
-		this.refundService.addRefund(r);
+		if(this.receiptService.updateRefundedById(r.getRid(), r.getTotal())) {
+			//create refund invoice
+			long iid = this.invoiceService.addInvoice(new Invoice(r.getPid(), r.getTotal()));
+			r.setIid(iid);
+			this.refundService.addRefund(r);
+		};
+	}
+
+	public void cancelRefund(long id, int amount) {
+		Refund r = this.refundService.updateCancelledTotal(id, amount);
+		if(r!=null) {
+			this.receiptService.addReceipt(new Receipt(
+					r.getPid(),
+					r.getIid(),
+					amount
+					));
+		}
 	}
 	public void addReceipt(@Valid Receipt r) {
-		this.invoiceService.updatePaidById(r.getIid(), r.getAmount());
-		this.receiptService.addReceipt(r);
+		if(this.invoiceService.updatePaidById(r.getIid(), r.getAmount())) {
+			this.receiptService.addReceipt(r);
+		}
 	}
+	/*READ*/
 	public Iterable<Object> getReceiptsByPid(long pid) {
 		ArrayList res = new ArrayList();
 		Iterable<Receipt> receipts = this.receiptService.getReceiptsByPid(pid);

@@ -25,6 +25,7 @@ public class Refund {
 	@NotNull(message= "transfer input must not be empty")
 	private int transfer;
 	private int total;
+	private int cancelledTotal;
 	public Refund() {}
 	public Refund(
 			@JsonProperty("pid")long pid, 
@@ -39,6 +40,7 @@ public class Refund {
 		this.setCredit(credit);
 		this.setTransfer(transfer);
 		this.setTotal(cash+credit+transfer);
+		this.setCancelledTotal(0);
 	}
 	public Long getId() { return id; }
 	public void setId(Long id) { this.id = id; }
@@ -61,6 +63,12 @@ public class Refund {
 	}
 	public void setIid(Long iid) {
 		this.iid = iid;
+	}
+	public int getCancelledTotal() {
+		return cancelledTotal;
+	}
+	public void setCancelledTotal(int cancelledTotal) {
+		this.cancelledTotal = cancelledTotal;
 	}
 
 }

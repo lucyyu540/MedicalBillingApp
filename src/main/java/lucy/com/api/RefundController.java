@@ -31,6 +31,10 @@ public class RefundController {
 	public void addRefund(@RequestBody @Valid @NonNull Refund r) {
 		this.mainService.addRefund(r);
 	}
+	@PutMapping(path = "id={id}/amount={amount}")
+	public void cancelRefund(@PathVariable("id") long id, @PathVariable("amount") int amount) {
+		this.mainService.cancelRefund(id, amount);
+	}
 	@GetMapping
 	public Iterable<Refund> getAllRefunds() {
 		return this.refundService.getAllRefunds();

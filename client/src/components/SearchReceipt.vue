@@ -1,7 +1,7 @@
 <template>
     <div>
         <name-search v-on:select="selectPerson"></name-search>
-        <ul class="list-group" v-if="receipts.length>0" >
+        <ul class="list-group padding " v-if="receipts.length>0" >
             <h5>수납 내역</h5>
             <div class = "row">
                     <div class = "col-1">id</div>
@@ -70,8 +70,7 @@ export default {
 </script>
 
 <style>
-.submit-form {
-  max-width: 300px;
-  margin: auto;
+.padding{
+  padding-top: 50px;
 }
 </style>
