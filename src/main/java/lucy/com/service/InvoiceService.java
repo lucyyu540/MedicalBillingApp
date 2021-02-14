@@ -19,9 +19,10 @@ public class InvoiceService {
 		this.invoiceRepo = ir;
 	}
 	/*CREATE*/
-	public void addInvoice(@Valid Invoice i) {
+	public long addInvoice(@Valid Invoice i) {
 		i.setId(this.invoiceRepo.count()+1);
 		this.invoiceRepo.save(i);
+		return i.getId();
 	}
 	/*READ*/
 	public Invoice getInvoiceById(long id) {

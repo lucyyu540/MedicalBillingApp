@@ -21,9 +21,9 @@ export default new Router ({
             component: () => import("./components/AddReceipt")
         },
         {
-            path: "/receipt",
-            name: "receipt",
-            component: () => import("./components/SearchReceipt")
+            path: "/refund",
+            name: "refund",
+            component: () => import("./components/Refund")
         },
         {
             path: "/search-person",

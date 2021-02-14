@@ -25,8 +25,8 @@ public class InvoiceController {
 		this.invoiceService = s;
 	}
 	@PostMapping
-	public void addInvoice(@RequestBody @Valid @NonNull Invoice i) {
-		this.invoiceService.addInvoice(i);
+	public long addInvoice(@RequestBody @Valid @NonNull Invoice i) {
+		return this.invoiceService.addInvoice(i);
 	}
 	@GetMapping
 	public Iterable<Invoice> getAllInvoices() {

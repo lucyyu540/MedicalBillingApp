@@ -35,8 +35,4 @@ public class RefundController {
 	public Iterable<Refund> getAllRefunds() {
 		return this.refundService.getAllRefunds();
 	}
-	@GetMapping(path = "rpd={pid}")
-	public Iterable<Object> getReceiptsByPid(@PathVariable("pid") long pid) {
-		return null;
-	}
 }

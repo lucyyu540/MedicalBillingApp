@@ -26,16 +26,8 @@ public class RefundService {
 	public Refund getRefundById(long id) {
 		return this.refundRepo.findById(id).orElse(null);
 	}
-	public Refund getRefundByRid(long rid) {
-		return this.refundRepo.getRefundByRid(rid).iterator().next();
-	}
-	public void getRefundByRid(Long rid, Map obj) {
-		Refund ref = this.getRefundByRid(rid);
-		obj.put("refundDate", ref.getDate());
-		obj.put("refundTotal", ref.getTotal());
-		obj.put("refundCash", ref.getCash());
-		obj.put("refundCredit", ref.getCredit());
-		obj.put("refundTransfer", ref.getTransfer());
+	public Iterable<Refund> getRefundsByRid(long rid) {
+		return this.refundRepo.getRefundByRid(rid);
 	}
 	public Iterable<Refund> getAllRefunds() {
 		return this.refundRepo.findAll();

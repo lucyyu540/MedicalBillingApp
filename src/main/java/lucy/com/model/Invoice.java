@@ -12,7 +12,6 @@ public class Invoice {
 	@Id
 	private Long id;
 	private Long pid;//환자등록번 
-	private String pName;//환자이름 
 	private String date;//진료기간 
 	private String type;//외래/입원(퇴원/중간) 
 	private String department;//진료과목 
@@ -20,15 +19,15 @@ public class Invoice {
 	private int outOfPocket;//본인부담금
 	private int paid;//누적실제수납 
 	private boolean clear; 
+	/*CONSTRUCTORS*/
 	public Invoice() {}
+	//regular invoice
 	public Invoice(
 			@JsonProperty("pid") long pid, 
-			@JsonProperty("pName") String pName, 
 			@JsonProperty("total") int total, 
 			@JsonProperty("type") String type, 
 			@JsonProperty("department") String department) {
 		this.setPid(pid);
-		this.setpName(pName);
 		this.setDate(new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()));
 		//    Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);  
 		this.setType(type);
@@ -37,6 +36,19 @@ public class Invoice {
 		this.setOutOfPocket((int) (total*0.3));
 		this.setPaid(0);
 		this.setClear(false);
+	}
+	//refund invoice
+	public Invoice(
+			@JsonProperty("pid") long pid, 
+			@JsonProperty("total") int total) {
+		this.setPid(pid);
+		this.setDate(new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()));
+		//    Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);  
+		this.setType("환불");
+		this.setTotal(-total);//negative val
+		this.setOutOfPocket(total);
+		this.setPaid(-total);
+		this.setClear(true);
 	}
 	/*GETTER SETTER*/
 	public Long getId() {return id;}
@@ -57,7 +69,5 @@ public class Invoice {
 	public void setDepartment(String department) {this.department = department;}
 	public boolean isClear() {return clear;}
 	public void setClear(boolean clear) {this.clear = clear;}
-	public String getpName() {return pName;}
-	public void setpName(String pName) {this.pName = pName;}
 	
 }

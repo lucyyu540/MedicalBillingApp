@@ -16,7 +16,7 @@ public class Receipt {
 	@NotNull(message= "patient id no. must not be empty")
 	private Long pid;//환저등록번호 
 	@NotNull(message= "invoice no. must not be empty")
-	private Long Iid;//invoice등록번호 
+	private Long iid;//invoice등록번호 
 	private String date;
 	@NotNull(message= "amount must not be empty")
 	private Integer amount;//수납액 
@@ -44,7 +44,7 @@ public class Receipt {
 	public void setRefunded(int refunded) {this.refunded = refunded;}
 	public Long getPid() {return pid;}
 	public void setPid(Long pid) {this.pid = pid;}
-	public Long getIid() {return Iid;}
-	public void setIid(Long iid) {this.Iid = iid;}
+	public Long getIid() {return iid;}
+	public void setIid(Long iid) {this.iid = iid;}
 
 }

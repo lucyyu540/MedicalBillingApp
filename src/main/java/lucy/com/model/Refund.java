@@ -16,6 +16,7 @@ public class Refund {
 	private Long pid;//환자등록번호
 	@NotNull(message= "receipt no. must not be empty")
 	private Long rid;//수납등록번호 
+	private Long iid;//환불 invoice 
 	private String date;
 	@NotNull(message= "cash input must not be empty")
 	private int cash;
@@ -55,5 +56,11 @@ public class Refund {
 	public void setPid(Long pid) { this.pid = pid; }
 	public Long getRid() { return rid; }
 	public void setRid(Long rid) { this.rid = rid; }
+	public Long getIid() {
+		return iid;
+	}
+	public void setIid(Long iid) {
+		this.iid = iid;
+	}
 
 }

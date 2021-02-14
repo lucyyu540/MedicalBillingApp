@@ -13,7 +13,7 @@
           <router-link to="/receipt/add" class="nav-link">수납하기</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/receipt" class="nav-link">수납환불</router-link>
+          <router-link to="/refund" class="nav-link">수납환불</router-link>
         </li>
       </div>
     </nav>

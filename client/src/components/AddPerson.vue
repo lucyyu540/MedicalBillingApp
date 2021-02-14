@@ -82,7 +82,11 @@ export default {
     
     newPerson() {
       this.submitted = false;
-      this.person = {};
+      this.person = {
+        name: null,
+        sex: null,
+        dob: new Date().toISOString().slice(0,10),
+      };
     }
   }
 };

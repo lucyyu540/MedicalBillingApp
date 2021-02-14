@@ -21,33 +21,14 @@
                 <div class = "row">
                     <div class = "col-1"><label><small>{{ r.id }}</small></label></div>
                     <div class = "col">{{ r.date }}</div>
-                    <div class = "col">₩{{ r.total }}</div>
-                    <div class = "col">₩{{ r.outOfPocket }}</div>
-                    <div class = "col">₩{{ r.paid }}</div>
+                    <div class = "col">₩{{ r.invoice.total }}</div>
+                    <div class = "col">₩{{ r.invoice.outOfPocket }}</div>
+                    <div class = "col">₩{{ r.invoice.paid }}</div>
                     <div class = "col">₩{{r.amount }}</div>
                     <div class = "col">₩{{r.refunded }}</div>
                 </div>
             </li>
         </ul>
-        <div class="card-body" v-if="currentIndex >-1 && receipts[currentIndex].refunded>0" >
-        <h5 class="card-title">환불 내역</h5>
-        <div class = "row">
-            <div class = "col-1">id</div>
-            <div class = "col">날짜</div>
-            <div class = "col">총환불액</div>
-            <div class = "col">현금</div>
-            <div class = "col">카드</div>
-            <div class = "col">이체</div>
-        </div>
-        <div class = "row">
-            <div class = "col-1"><label><small>{{ receipts[currentIndex].id }}</small></label></div>
-            <div class = "col">{{ receipts[currentIndex].refundDate }}</div>
-            <div class = "col">₩{{ receipts[currentIndex].refundTotal }}</div>
-            <div class = "col">₩{{ receipts[currentIndex].refundCash }}</div>
-            <div class = "col">₩{{ receipts[currentIndex].refundCredit }}</div>
-            <div class = "col">₩{{receipts[currentIndex].refundTransfer }}</div>
-        </div>
-        </div>
     </div>
 </template>
 

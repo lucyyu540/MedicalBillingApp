@@ -84,7 +84,6 @@ export default {
     return {
       invoice: {
         pid: null,
-        pName: null,
         total: null,
         type: '외래',
         department: null
@@ -100,7 +99,6 @@ export default {
     saveInvoice() {
       var data = {
         pid: this.person.id,
-        pName: this.person.name,
         total: this.invoice.total,
         type: this.invoice.type,
         department: this.invoice.department
@@ -117,10 +115,12 @@ export default {
     },
     newInvoice() {
       this.submitted = false;
+      this.person = null;
       this.invoice = {
-            total: null,
-            type: '외래',
-            department: null
+        pid: null,
+        total: null,
+        type: '외래',
+        department: null
       }
     }
   }

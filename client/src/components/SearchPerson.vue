@@ -24,16 +24,18 @@
             v-for="(p, index) in people"
             :key="index"
             @click="setPersonActive(index)"
+            @mouseover="setPersonHover(index)"
+            @mouseleave="resetPersonHover()"
             >
             {{ p.name }}
             </li>
         </ul>
         </div>
         <div class="col-md-6">
-            <div v-if="currentIndex>-1">
-                <div><label><strong>이름:</strong></label> {{ people[currentIndex].name }}</div>
-                <div><label><strong>성별:</strong></label> {{ people[currentIndex].sex }}</div>
-                <div><label><strong>생년월일:</strong></label> {{ people[currentIndex].dob }}</div>
+            <div v-if="hoverIndex>-1">
+                <div><label><strong>이름:</strong></label> {{ people[hoverIndex].name }}</div>
+                <div><label><strong>성별:</strong></label> {{ people[hoverIndex].sex }}</div>
+                <div><label><strong>생년월일:</strong></label> {{ people[hoverIndex].dob }}</div>
             </div>
         </div> 
     </div>  
@@ -49,6 +51,7 @@ export default {
       searchName: null,
       people: [],
       currentIndex : -1,
+      hoverIndex : -1
     };
   },
   methods: {
@@ -79,6 +82,12 @@ export default {
     setPersonActive(index) {
         this.currentIndex = index;
         this.$emit('select', this.people[this.currentIndex]);
+    },
+    setPersonHover(index) {
+      this.hoverIndex = index;
+    },
+    resetPersonHover() {
+      this.hoverIndex = -1;
     }
   }
 };

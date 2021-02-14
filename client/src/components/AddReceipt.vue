@@ -67,6 +67,9 @@ export default {
     newReceipt() {
       this.submitted = false;
       this.invoice = null;
+      this.receipt =  {
+        amount: null
+      };
     }
   }
 };

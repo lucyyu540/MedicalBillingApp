@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import dto.ReceiptDto;
 import lucy.com.service.*;
 import lucy.com.model.*;
 @Service 
@@ -30,6 +31,10 @@ public class MainService {
 		this.refundService = refundService;
 	}
 	public void addRefund(@Valid Refund r) {
+		//create refund invoice
+		long iid = this.invoiceService.addInvoice(new Invoice(r.getPid(), r.getTotal()));
+		r.setIid(iid);
+		//match to receipt
 		this.receiptService.updateRefundedById(r.getRid(), r.getTotal());
 		this.refundService.addRefund(r);
 	}
@@ -41,13 +46,17 @@ public class MainService {
 		ArrayList res = new ArrayList();
 		Iterable<Receipt> receipts = this.receiptService.getReceiptsByPid(pid);
 		for(Receipt r : receipts) {
-			Map obj = new HashMap();
-			obj.put("id", r.getId());
-			obj.put("date", r.getDate());//수납날짜 
-			obj.put("amount", r.getAmount());//수납액 
-			obj.put("refunded", r.getRefunded());//환불액 
-			this.invoiceService.getInvoiceById(r.getIid(), obj);//총진료비, 본인부담금, 총수납액 
-			if(r.getRefunded() > 0) this.refundService.getRefundByRid(r.getId(), obj);//날짜, 현금,카드,이체,총금액 
+			Invoice invoice = this.invoiceService.getInvoiceById(r.getIid());//총진료비, 본인부담금, 총수납액 
+			Iterable<Refund> refunds = this.refundService.getRefundsByRid(r.getId());//날짜, 현금,카드,이체,총금액 
+			ReceiptDto obj = new ReceiptDto(
+					invoice,
+					refunds,
+					r.getId(),
+					r.getPid(),
+					r.getIid(),
+					r.getDate(),
+					r.getAmount(),
+					r.getRefunded());
 			res.add(obj);
 		}
 		return res;
