@@ -42,6 +42,7 @@ public class MainService {
 		Iterable<Receipt> receipts = this.receiptService.getReceiptsByPid(pid);
 		for(Receipt r : receipts) {
 			Map obj = new HashMap();
+			obj.put("id", r.getId());
 			obj.put("date", r.getDate());//수납날짜 
 			obj.put("amount", r.getAmount());//수납액 
 			obj.put("refunded", r.getRefunded());//환불액 

@@ -23,7 +23,7 @@ export default new Router ({
         {
             path: "/receipt",
             name: "receipt",
-            component: () => import("./components/Receipt")
+            component: () => import("./components/SearchReceipt")
         },
         {
             path: "/search-person",
