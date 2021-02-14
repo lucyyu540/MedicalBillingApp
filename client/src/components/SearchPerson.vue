@@ -31,7 +31,7 @@
         </div>
         <div class="col-md-6">
             <div v-if="currentIndex>-1">
-                <div><label><strong>아름:</strong></label> {{ people[currentIndex].name }}</div>
+                <div><label><strong>이름:</strong></label> {{ people[currentIndex].name }}</div>
                 <div><label><strong>성별:</strong></label> {{ people[currentIndex].sex }}</div>
                 <div><label><strong>생년월일:</strong></label> {{ people[currentIndex].dob }}</div>
             </div>

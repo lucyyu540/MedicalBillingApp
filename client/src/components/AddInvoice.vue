@@ -4,21 +4,24 @@
         <div class="submit-form">
             <div v-if="person">
             <div v-if="!submitted">
-                <div class="form-check">
+                <div class="form-check form-check-inline">
                     <input class="form-check-input" 
                     type="radio" 
-                    name="flexRadioDefault" 
+                    name="type" 
                     id="외래"
+                    value = "외래"
                     v-model="invoice.type"
+                    checked
                     >
                     <label class="form-check-label" for="외래">외래</label>
                 </div>
-                <div class="form-check">
+                <div class="form-check form-check-inline">
                     <input 
                     class="form-check-input" 
                     type="radio" 
-                    name="flexRadioDefault" 
+                    name="type" 
                     id="입원"
+                    value = "입원"
                     v-model="invoice.type"
                     >
                     <label class="form-check-label" for="입원">입원</label>
@@ -30,7 +33,6 @@
                     class="form-control"
                     id="name"
                     required
-                    v-model="invoice.pName"
                     name="name"
                     :placeholder="person.name"
                     disabled
@@ -51,7 +53,7 @@
                 <div class="form-group">
                     <label for="total">총 진료비</label>
                     <input
-                    type="text"
+                    type="number"
                     class="form-control"
                     id="total"
                     required
@@ -84,7 +86,7 @@ export default {
         pid: null,
         pName: null,
         total: null,
-        type: null,
+        type: '외래',
         department: null
       },
       submitted: false,
@@ -103,7 +105,7 @@ export default {
         type: this.invoice.type,
         department: this.invoice.department
       };
-
+      console.log(data);
       invoiceDS.addInvoice(JSON.parse(JSON.stringify(data)))
         .then(() => {
             console.log('saved');
@@ -120,7 +122,7 @@ export default {
             pid: null,
             pName: null,
             total: null,
-            type: null,
+            type: '외래',
             department: null
       }
       this.person = null;

@@ -55,6 +55,9 @@ public class InvoiceService {
 			System.out.println(e.getMessage());
 		}
 	}
+	public void deleteInvoiceById(Long id) {
+		this.invoiceRepo.deleteById(id);
+	}
 
 	
 }
