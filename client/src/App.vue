@@ -10,7 +10,7 @@
           <router-link to="/invoice/add" class="nav-link">진료비 청구서 발급</router-link>
         </li>
          <li class="nav-item">
-          <router-link to="/receipt" class="nav-link">수납하기</router-link>
+          <router-link to="/receipt/add" class="nav-link">수납하기</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/receipt" class="nav-link">수납환불</router-link>

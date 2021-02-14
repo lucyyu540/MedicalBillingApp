@@ -117,15 +117,11 @@ export default {
     },
     newInvoice() {
       this.submitted = false;
-      this.personFound = false;
       this.invoice = {
-            pid: null,
-            pName: null,
             total: null,
             type: '외래',
             department: null
       }
-      this.person = null;
     }
   }
 };

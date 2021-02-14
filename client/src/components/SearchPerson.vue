@@ -49,7 +49,6 @@ export default {
       searchName: null,
       people: [],
       currentIndex : -1,
-      selectedPerson: null
     };
   },
   methods: {
@@ -79,8 +78,7 @@ export default {
     },
     setPersonActive(index) {
         this.currentIndex = index;
-        this.selectedPerson = this.people[this.currentIndex];
-        this.$emit('select', this.selectedPerson);
+        this.$emit('select', this.people[this.currentIndex]);
     }
   }
 };
