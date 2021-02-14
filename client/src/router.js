@@ -24,6 +24,11 @@ export default new Router ({
             path: "/receipt",
             name: "receipt",
             component: () => import("./components/Receipt")
+        },
+        {
+            path: "/search-person",
+            name: "search-person",
+            component: () => import("./components/SearchPerson")
         }
 
     ]

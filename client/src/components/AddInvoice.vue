@@ -1,19 +1,63 @@
 <template>
     <div>
-        <name-search></name-search>
+        <name-search v-on:select="selectPerson"></name-search>
         <div class="submit-form">
+            <div v-if="person">
             <div v-if="!submitted">
+                <div class="form-check">
+                    <input class="form-check-input" 
+                    type="radio" 
+                    name="flexRadioDefault" 
+                    id="외래"
+                    v-model="invoice.type"
+                    >
+                    <label class="form-check-label" for="외래">외래</label>
+                </div>
+                <div class="form-check">
+                    <input 
+                    class="form-check-input" 
+                    type="radio" 
+                    name="flexRadioDefault" 
+                    id="입원"
+                    v-model="invoice.type"
+                    >
+                    <label class="form-check-label" for="입원">입원</label>
+                </div>
                 <div class="form-group">
-                    <label for="type">진료과목</label>
+                    <label for="name">이름</label>
+                    <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    required
+                    v-model="invoice.pName"
+                    name="name"
+                    :placeholder="person.name"
+                    disabled
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="department">진료과목</label>
                         <select class="form-control" 
-                        id="type"
+                        id="department"
                         required
-                        v-model="invoice.type"
-                        name="type"
+                        v-model="invoice.department"
+                        name="department"
                         >
                             <option value="내분비내과">내분비내과</option>
                             <option value="외과">외과</option>
                         </select>
+                </div>
+                <div class="form-group">
+                    <label for="total">총 진료비</label>
+                    <input
+                    type="text"
+                    class="form-control"
+                    id="total"
+                    required
+                    v-model="invoice.total"
+                    name="name"
+                    />
                 </div>
                 <button @click="saveInvoice" class="btn btn-success">등록</button>
             </div>
@@ -21,12 +65,12 @@
                 <h4>등록 완료했습니다</h4>
                 <button class="btn btn-success" @click="newInvoice">추가 등록</button>
             </div>
+            </div>
         </div>
   </div>
 </template>
 
 <script>
-import personDS from "../service/PersonDataService";
 import invoiceDS from '../service/InvoiceDataService';
 import searchpersoncomp from "./SearchPerson"
 export default {
@@ -44,36 +88,17 @@ export default {
         department: null
       },
       submitted: false,
-      name: null,
-      people: [],
-      currentIndex : -1,
-      personFound : false,
-      currentPerson: null,
       person: null
     };
   },
   methods: {
-    getPeople() {
-        personDS.getPeopleByName(this.name)
-        .then(res => {
-             this.people = res.data;
-        })
-        .catch(e => {
-            console.log(e);
-        })
-    },
-    setPersonActive(p, index) {
-        this.currentPerson = p;
-        this.currentIndex = index;
-    },
-    selectPerson() {
-        this.currentPerson = this.person;
-        this.personFound = true;
+    selectPerson(p) {
+        this.person = p;
     },
     saveInvoice() {
       var data = {
-        pid: this.invoice.pid,
-        pName: this.invoice.pName,
+        pid: this.person.id,
+        pName: this.person.name,
         total: this.invoice.total,
         type: this.invoice.type,
         department: this.invoice.department
@@ -88,12 +113,17 @@ export default {
           console.log(e);
         });
     },
-    
     newInvoice() {
       this.submitted = false;
       this.personFound = false;
-      this.invoice = {};
-      this.person = {};
+      this.invoice = {
+            pid: null,
+            pName: null,
+            total: null,
+            type: null,
+            department: null
+      }
+      this.person = null;
     }
   }
 };

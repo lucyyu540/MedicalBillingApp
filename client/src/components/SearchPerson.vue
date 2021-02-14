@@ -1,37 +1,42 @@
 <template>
-  <div class="submit-form">
-    <div class="form-group">
-        <label for="name">환자 검색</label>
-        <input
-          type="text"
-          class="form-control"
-          id="name"
-          required
-          v-model="name"
-          name="name"
-        />
-    </div>
-    <button @click="getPeople" class="btn btn-success">검색</button>
-    <div class="col-md-6">
-      <ul class="list-group">
-        <li class="list-group-item"
-          :class="{ active: index == currentIndex }"
-          v-for="(p, index) in people"
-          :key="index"
-          @click="setPersonActive(p, index)"
+  <div>
+    <label for="searchName">환자 검색</label>
+    <div class="input-group mb-3 submit-form">
+        <input type="text" 
+            class="form-control" 
+            placeholder="이름" 
+            id="searchName"
+            required
+            v-model="searchName"
+            v-on:keyup="enterGetPeople" 
+            name="searchName"
         >
-          {{ p.name }}
-        </li>
-      </ul>
-        <div v-if="people.length>0"><button class="m-3 btn btn-sm btn-success" @click="selectPerson">선택</button></div>
+        <button 
+        @click="getPeople"
+        class="btn btn-outline-secondary" 
+        type="button" >검색</button>
     </div>
-    <div class="col-md-6">
-      <div v-if="currentPerson">
-        <div><label><strong>아름:</strong></label> {{ currentPerson.name }}</div>
-        <div><label><strong>성별:</strong></label> {{ currentPerson.sex }}</div>
-        <div><label><strong>생년월일:</strong></label> {{ currentPerson.dob }}</div>
-      </div>
-    </div>        
+    <div class="row">
+        <div class="col-md-6">
+        <ul class="list-group">
+            <li class="list-group-item"
+            :class="{ active: index == currentIndex }"
+            v-for="(p, index) in people"
+            :key="index"
+            @click="setPersonActive(index)"
+            >
+            {{ p.name }}
+            </li>
+        </ul>
+        </div>
+        <div class="col-md-6">
+            <div v-if="currentIndex>-1">
+                <div><label><strong>아름:</strong></label> {{ people[currentIndex].name }}</div>
+                <div><label><strong>성별:</strong></label> {{ people[currentIndex].sex }}</div>
+                <div><label><strong>생년월일:</strong></label> {{ people[currentIndex].dob }}</div>
+            </div>
+        </div> 
+    </div>  
   </div>
 </template>
 
@@ -44,28 +49,39 @@ export default {
       searchName: null,
       people: [],
       currentIndex : -1,
-      currentPerson: null,
       selectedPerson: null
     };
   },
   methods: {
+    enterGetPeople: function(e) {
+      if (e.keyCode === 13 && this.searchName) {
+          this.currentIndex = -1;
+          personDS.getPeopleByName(this.searchName)
+                .then(res => {
+                    this.people = res.data;
+                })
+                .catch(e => {
+                    console.log(e);
+                })
+      }
+    },
     getPeople() {
-        personDS.getPeopleByName(this.name)
-        .then(res => {
-             this.people = res.data;
-        })
-        .catch(e => {
-            console.log(e);
-        })
+        if(this.searchName) {
+            this.currentIndex = -1;
+             personDS.getPeopleByName(this.searchName)
+                .then(res => {
+                    this.people = res.data;
+                })
+                .catch(e => {
+                    console.log(e);
+                })
+        }
     },
-    setPersonActive(p, index) {
-        this.currentPerson = p;
+    setPersonActive(index) {
         this.currentIndex = index;
-    },
-    selectPerson() {
-        this.currentPerson = this.person;
-        this.personFound = true;
-    },
+        this.selectedPerson = this.people[this.currentIndex];
+        this.$emit('select', this.selectedPerson);
+    }
   }
 };
 </script>
