@@ -21,6 +21,9 @@ public class Invoice {
 	private boolean clear; 
 	/*CONSTRUCTORS*/
 	public Invoice() {}
+	public Invoice(long pid, String type, String department, int total, int OutOfPocket, int paid, boolean clear) {
+		setPid(pid); setType(type); setDepartment(department); setTotal(total); setOutOfPocket(OutOfPocket); setPaid(paid); setClear(clear);
+	}
 	//regular invoice
 	public Invoice(
 			@JsonProperty("pid") long pid, 

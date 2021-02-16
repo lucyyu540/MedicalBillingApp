@@ -18,9 +18,10 @@ public class RefundService {
 		this.refundRepo = rr;		
 	}
 	/*CREATE*/
-	public void addRefund(@Valid Refund r) {
+	public Refund addRefund(@Valid Refund r) {
 		r.setId(this.refundRepo.count()+1);
 		this.refundRepo.save(r);
+		return r;
 	}
 	/*READ*/
 	public Refund getRefundById(long id) {
@@ -33,9 +34,9 @@ public class RefundService {
 		return this.refundRepo.findAll();
 	}
 	/*UPDATE*/ 
-	public Refund updateCancelledTotal(long id, int amount) {
+	public Refund updateCancelledTotalById(long id, int amount) {
 		Refund r = this.getRefundById(id);
-		if(r==null || r.getTotal() - r.getCancelledTotal() < amount) return null;
+		if(r==null || r.getTotal() < r.getCancelledTotal() + amount) return null;
 		r.setCancelledTotal(r.getCancelledTotal()+amount);
 		this.refundRepo.save(r);
 		return r;

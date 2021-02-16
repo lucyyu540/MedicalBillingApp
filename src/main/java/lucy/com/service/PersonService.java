@@ -13,9 +13,10 @@ public class PersonService {
 		this.personRepo = personRepo;
 	}
 	/*CREATE*/
-	public void addPerson(Person p) {
+	public Person addPerson(Person p) {
 		p.setId(this.personRepo.count()+1);
 		this.personRepo.save(p);
+		return p;
 	}
 	/*READ*/
 	public Person getPersonById(long id) {
@@ -28,20 +29,14 @@ public class PersonService {
 		return this.personRepo.findPeopleByName(name);
 	}
 	/*UPDATE*/
-	public int updatePersonById(long id, Person person) {
-		try { 
-			Person p = getPersonById(id);
-			System.out.println(p.getName());
-			p.setName(person.getName());
-			p.setDob(person.getDob());
-			p.setSex(person.getSex());
-			this.personRepo.save(p);
-			return 1;
-		}
-		catch(Exception e) {
-			System.out.println(e.getMessage());
-			return 0;
-		}
+	public Person updatePersonById(long id, Person person) {
+		Person p = getPersonById(id);
+		if(p==null) return null;
+		p.setName(person.getName());
+		p.setDob(person.getDob());
+		p.setSex(person.getSex());
+		this.personRepo.save(p);
+		return p;
 	}
 	/*DELETE*/
 	public void deletePersonById(long id) {

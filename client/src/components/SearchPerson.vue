@@ -8,7 +8,7 @@
             id="searchName"
             required
             v-model="searchName"
-            v-on:keyup="enterGetPeople" 
+            v-on:keyup="typing" 
             name="searchName"
         >
         <button 
@@ -55,8 +55,8 @@ export default {
     };
   },
   methods: {
-    enterGetPeople: function(e) {
-      if (e.keyCode === 13 && this.searchName) {
+    typing: function(e) {
+      if (e && this.searchName) {
           this.currentIndex = -1;
           personDS.getPeopleByName(this.searchName)
                 .then(res => {

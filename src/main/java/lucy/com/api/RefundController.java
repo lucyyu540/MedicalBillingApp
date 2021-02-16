@@ -31,7 +31,7 @@ public class RefundController {
 	public void addRefund(@RequestBody @Valid @NonNull Refund r) {
 		this.mainService.addRefund(r);
 	}
-	@PutMapping(path = "id={id}/amount={amount}")
+	@PutMapping(path = "cancel/id={id}/amount={amount}")
 	public void cancelRefund(@PathVariable("id") long id, @PathVariable("amount") int amount) {
 		this.mainService.cancelRefund(id, amount);
 	}

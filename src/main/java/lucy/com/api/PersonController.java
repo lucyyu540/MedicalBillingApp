@@ -24,8 +24,8 @@ public class PersonController {
 		this.personService = ps;
 	}
 	@PostMapping
-	public void addPerson(@RequestBody @Valid @NonNull Person p) {
-		this.personService.addPerson(p);
+	public Person addPerson(@RequestBody @Valid @NonNull Person p) {
+		return this.personService.addPerson(p);
 	}
 	@GetMapping
 	public Iterable<Person> getAllPeople() {

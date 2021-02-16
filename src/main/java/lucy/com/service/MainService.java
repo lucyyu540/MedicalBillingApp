@@ -31,28 +31,27 @@ public class MainService {
 		this.refundService = refundService;
 	}
 	/*CREATE*/
-	public void addRefund(@Valid Refund r) {
+	public Refund addRefund(@Valid Refund r) {
 		//match to receipt
-		if(this.receiptService.updateRefundedById(r.getRid(), r.getTotal())) {
+		if(this.receiptService.updateRefundedById(r.getRid(), r.getTotal())!= null) {
 			//create refund invoice
-			long iid = this.invoiceService.addInvoice(new Invoice(r.getPid(), r.getTotal()));
-			r.setIid(iid);
-			this.refundService.addRefund(r);
+			Invoice i = this.invoiceService.addInvoice(new Invoice(r.getPid(), "환불", null, - r.getTotal(), 0, -r.getTotal(), true));;
+			r.setIid(i.getId());
+			return this.refundService.addRefund(r);
 		};
+		return null;
 	}
 
 	public void cancelRefund(long id, int amount) {
-		Refund r = this.refundService.updateCancelledTotal(id, amount);
+		Refund r = this.refundService.updateCancelledTotalById(id, amount);
 		if(r!=null) {
-			this.receiptService.addReceipt(new Receipt(
-					r.getPid(),
-					r.getIid(),
-					amount
-					));
+			//create cancel refund invoice 
+			Invoice i = this.invoiceService.addInvoice(new Invoice(r.getPid(), "재수납", null, amount, amount, amount, true));
+			this.receiptService.addReceipt(new Receipt(r.getPid(), i.getId(),amount));
 		}
 	}
 	public void addReceipt(@Valid Receipt r) {
-		if(this.invoiceService.updatePaidById(r.getIid(), r.getAmount())) {
+		if(this.invoiceService.updatePaidById(r.getIid(), r.getAmount())!= null) {
 			this.receiptService.addReceipt(r);
 		}
 	}

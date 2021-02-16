@@ -19,10 +19,10 @@ public class InvoiceService {
 		this.invoiceRepo = ir;
 	}
 	/*CREATE*/
-	public long addInvoice(@Valid Invoice i) {
+	public Invoice addInvoice(@Valid Invoice i) {
 		i.setId(this.invoiceRepo.count()+1);
 		this.invoiceRepo.save(i);
-		return i.getId();
+		return i;
 	}
 	/*READ*/
 	public Invoice getInvoiceById(long id) {
@@ -37,26 +37,14 @@ public class InvoiceService {
 	public Iterable<Invoice> getUnclearedInvoicesByPid(long pid) {
 		return this.invoiceRepo.getUnclearedInvoicesByPid(pid);
 	}
-	public void getInvoiceById(Long id, Map obj) {
-		Invoice i = this.getInvoiceById(id);
-		obj.put("total", i.getTotal());//총진료비 
-		obj.put("outOfPocket", i.getOutOfPocket());//본인부담금 
-		obj.put("paid", i.getPaid());//총수납액 
-	}
 	/*UPDATE*/
-	public boolean updatePaidById(Long id, int amount) {
-		try {
-			Invoice inv = this.invoiceRepo.findById(id).get();
-			if(amount>inv.getOutOfPocket()) throw new Exception("Overpayment");
-			inv.setPaid(inv.getPaid()+amount);
-			if(inv.getPaid() == inv.getOutOfPocket()) inv.setClear(true);
-			this.invoiceRepo.save(inv);
-			return true;
-		}
-		catch(Exception e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
+	public Invoice updatePaidById(Long id, int amount) {
+		Invoice inv = getInvoiceById(id);
+		if(inv == null || amount+inv.getPaid()>inv.getOutOfPocket()) return null;
+		inv.setPaid(inv.getPaid()+amount);
+		if(inv.getPaid() == inv.getOutOfPocket()) inv.setClear(true);
+		this.invoiceRepo.save(inv);
+		return inv;
 	}
 	public void deleteInvoiceById(Long id) {
 		this.invoiceRepo.deleteById(id);

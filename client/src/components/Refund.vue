@@ -4,25 +4,27 @@
         <ul class="list-group padding" v-if="receipt && receipt.refunded>0" >
           <h5 class="card-title">환불 내역</h5>
           <div class = "row">
-              <div class = "col-1">id</div>
               <div class = "col">날짜</div>
               <div class = "col">총환불액</div>
               <div class = "col">현금</div>
               <div class = "col">카드</div>
               <div class = "col">이체</div>
+              <div class = "col"></div>
           </div>
           <li class="list-group-item"
                   v-for="(r, index) in receipt.refunds"
                   :key="index"
               >
                   <div class = "row">
-                      <div class = "col-1"><label><small>{{ r.id }}</small></label></div>
                       <div class = "col">{{ r.date }}</div>
                       <div class = "col">₩{{ r.total }}</div>
                       <div class = "col">₩{{ r.cash }}</div>
                       <div class = "col">₩{{ r.credit }}</div>
                       <div class = "col">₩{{r.transfer }}</div>
-                      <button class="btn btn-primary" type="button">재수납</button>
+                      <button class="btn btn-primary" 
+                      :class="{ disabled: r.cancelledTotal == r.total }"
+                      type="button"
+                      >재수납</button>
                   </div>
               </li>
               
@@ -35,8 +37,6 @@
 
 <script>
 import refundDS from '../service/RefundDataService';
-import invoiceDS from '../service/InvoiceDataService';
-import receiptDS from '../service/ReceiptDataService';
 import SearchReceipt from './SearchReceipt';
 export default {
     components: {
@@ -58,8 +58,6 @@ export default {
         this.refund.total = this.receipt.amount;
     },
     addRefund() {
-      //1) create refund invoice
-      //2) create refund 
         var data = {
           pid: this.receipt.pid,
           rid: this.receipt.id,
@@ -107,5 +105,6 @@ export default {
 <style>
 .padding{
   padding-top: 50px;
+  padding-bottom: 50px;
 }
 </style>
