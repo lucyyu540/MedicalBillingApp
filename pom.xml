@@ -75,17 +75,18 @@
 				<version>1.11.2</version>
                 <configuration>
                    <workingDirectory>client</workingDirectory>
-                    <installDirectory>client</installDirectory>
+                   <installDirectory>target</installDirectory>
                 </configuration>
 
                 <executions>
 
                     <execution>
-                        <id>install yarn</id>
+                        <id>install yarn and node</id>
                         <goals>
-                            <goal>yarn</goal>
+                            <goal>install-node-and-yarn</goal>
                         </goals>
                         <configuration>
+                        		<nodeVersion>v15.8.0</nodeVersion>
                             <yarnVersion>v1.22.10</yarnVersion>
                         </configuration>
                     </execution>
