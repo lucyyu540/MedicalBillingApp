@@ -6,5 +6,8 @@ class RefundDataService {
     getAllRefunds() {
         return http.get("/refund");
     }
+    cancelRefund(id, amount) {
+        return http.put(`/refund/cancel/id=${id}/amount=${amount}`)
+    }
 }
 export default new RefundDataService();

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <router-link to="/" class="navbar-brand">bezKoder</router-link>
+      <router-link to="/" class="navbar-brand">수납 환불 관리</router-link>
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
           <router-link to="/person/add" class="nav-link">환자 등록하기</router-link>
