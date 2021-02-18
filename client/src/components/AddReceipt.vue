@@ -2,7 +2,7 @@
     <div>
         <invoice-search v-on:select="selectInvoice"></invoice-search>
         <div class="submit-form">
-            <div v-if="invoice">
+            <div v-if="invoice" class = "padding">
             <div v-if="!submitted">
                 <div class="form-group">
                     <label for="total">수납 금액</label>
@@ -15,11 +15,13 @@
                     name="amount"
                     />
                 </div>
-                <button @click="saveReceipt" class="btn btn-success">수납</button>
+                <b-button  block variant="primary"
+                :class="{disabled: receipt.amount >invoice.outOfPocket-invoice.paid||receipt.amount == 0}"
+                @click="saveReceipt" 
+                >수납</b-button>
             </div>
             <div v-else>
                 <h4>수납을 완료했습니다</h4>
-                <button class="btn btn-success" @click="newReceipt">재수납</button>
             </div>
             </div>
         </div>
@@ -79,5 +81,9 @@ export default {
 .submit-form {
   max-width: 300px;
   margin: auto;
+}
+.padding{
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 </style>

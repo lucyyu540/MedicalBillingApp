@@ -36,13 +36,18 @@
         />
       </div>
 
-
-      <button @click="savePerson" class="btn btn-success">등록</button>
+      <b-button  block variant="primary"
+        :class="{disabled: person.name==null||person.sex==null||person.dob==null}"
+        @click="savePerson"
+        >등록</b-button>
     </div>
 
     <div v-else>
-      <h4>등록 완료했습니다</h4>
-      <button class="btn btn-success" @click="newPerson">추가 등록</button>
+      <h4>등록을 완료했습니다</h4>
+      <b-button  block variant="primary"
+        @click="newPerson"
+        >추가 등록</b-button>
+      
     </div>
   </div>
 </template>

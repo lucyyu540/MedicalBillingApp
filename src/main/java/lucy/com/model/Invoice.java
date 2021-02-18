@@ -40,19 +40,6 @@ public class Invoice {
 		this.setPaid(0);
 		this.setClear(false);
 	}
-	//refund invoice
-	public Invoice(
-			@JsonProperty("pid") long pid, 
-			@JsonProperty("total") int total) {
-		this.setPid(pid);
-		this.setDate(new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()));
-		//    Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);  
-		this.setType("환불");
-		this.setTotal(-total);//negative val
-		this.setOutOfPocket(total);
-		this.setPaid(-total);
-		this.setClear(true);
-	}
 	/*GETTER SETTER*/
 	public Long getId() {return id;}
 	public void setId(Long id) {this.id = id;}

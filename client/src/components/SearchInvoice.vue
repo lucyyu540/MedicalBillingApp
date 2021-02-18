@@ -1,7 +1,7 @@
 <template>
     <div>
         <name-search v-on:select="selectPerson"></name-search>
-        <ul class="list-group">
+        <ul class="list-group padding">
             <div v-if="invoices.length>0" class = "row">
                     <div class = "col-1">id</div>
                     <div class = "col">진료과목</div>
@@ -72,5 +72,9 @@ export default {
 .submit-form {
   max-width: 300px;
   margin: auto;
+}
+.padding{
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 </style>

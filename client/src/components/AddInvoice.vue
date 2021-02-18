@@ -2,7 +2,7 @@
     <div>
         <name-search v-on:select="selectPerson"></name-search>
         <div class="submit-form">
-            <div v-if="person">
+            <div v-if="person" class = "padding">
             <div v-if="!submitted">
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" 
@@ -61,11 +61,16 @@
                     name="name"
                     />
                 </div>
-                <button @click="saveInvoice" class="btn btn-success">등록</button>
+                <b-button  block variant="primary"
+                :class="{disabled: invoice.type==null||invoice.department==null||invoice.total==null}"
+                @click="saveInvoice" 
+                >등록</b-button>
             </div>
             <div v-else>
                 <h4>등록 완료했습니다</h4>
-                <button class="btn btn-success" @click="newInvoice">추가 등록</button>
+                <b-button  block variant="primary"
+                @click="newInvoice"
+                >추가 등록</b-button>
             </div>
             </div>
         </div>
@@ -131,5 +136,9 @@ export default {
 .submit-form {
   max-width: 300px;
   margin: auto;
+}
+.padding{
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 </style>
