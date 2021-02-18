@@ -1,4 +1,5 @@
 
+====================================================
 
 DATABASE SETUP
 
@@ -18,8 +19,12 @@ spring.datasource.password=<your password>
 mvn install -- build both front and back-end
 java -jar target/demo-0.0.1-SNAPSHOT.jar -- start bundled application
 
+====================================================
+
 BACKEND
 mvn spring-boot:run -- run back-end
+
+====================================================
 
 FRONTEND
 cd client
