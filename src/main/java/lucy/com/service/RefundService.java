@@ -19,7 +19,6 @@ public class RefundService {
 	}
 	/*CREATE*/
 	public Refund addRefund(@Valid Refund r) {
-		r.setId(this.refundRepo.count()+1);
 		this.refundRepo.save(r);
 		return r;
 	}

@@ -14,7 +14,6 @@ public class PersonService {
 	}
 	/*CREATE*/
 	public Person addPerson(Person p) {
-		p.setId(this.personRepo.count()+1);
 		this.personRepo.save(p);
 		return p;
 	}

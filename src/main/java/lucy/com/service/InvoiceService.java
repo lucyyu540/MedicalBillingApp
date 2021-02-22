@@ -20,7 +20,6 @@ public class InvoiceService {
 	}
 	/*CREATE*/
 	public Invoice addInvoice(@Valid Invoice i) {
-		i.setId(this.invoiceRepo.count()+1);
 		this.invoiceRepo.save(i);
 		return i;
 	}

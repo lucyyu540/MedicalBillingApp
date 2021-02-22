@@ -21,7 +21,6 @@ public class ReceiptService {
 	}
 	/*CREATE*/
 	public Receipt addReceipt(@Valid Receipt r) {
-		r.setId(this.receiptRepo.count()+1);
 		this.receiptRepo.save(r);
 		return r;
 	}

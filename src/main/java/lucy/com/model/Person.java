@@ -1,13 +1,17 @@
 package lucy.com.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity 
 public class Person { 
-	@Id
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	@NotBlank
 	private String name;
@@ -36,7 +40,7 @@ public class Person {
 	public void setSex(String sex) {this.sex = sex;}
 	public String getDob() {return dob;}
 	public void setDob(String dob) {this.dob = dob;}
-	public long getId() {return id;}
-	public void setId(long id) {this.id = id;}
+	public Long getId() {return id;}
+	public void setId(Long id) {this.id = id;}
 
 }
