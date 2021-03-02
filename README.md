@@ -1,6 +1,6 @@
 
 
-### DATABASE SETUP
+### Database setup
 
 ```
 mysql -u root
@@ -16,22 +16,22 @@ spring.datasource.password=<your password>
 ```
 
 
-### BUILD BOTH FRONT AND BACK-END
+### Build front and back-end 
 ```
 mvn install
 ```
 
-### START BUNDLEDD APPLICATION
+### Start bundled application
 ```
 java -jar target/demo-0.0.1-SNAPSHOT.jar 
 ```
 
-### RUN BACK-END
+### Run back-end
 ```
 mvn spring-boot:run -- run back-end
 ```
 
-### RUN FRONT-END
+### Run front-end
 ```
 cd client
 yarn run serve
