@@ -3,7 +3,7 @@
 ### Database setup
 
 ```
-mysql -u root
+$mysql -u root
 mysql> create database refundApp; -- Creates the new database
 mysql> create user 'user'@'%' identified by 'password'; -- Creates the user
 mysql> grant all on refundApp.* to 'user'@'%'; -- Gives all privileges to the new user on the newly created database
@@ -19,21 +19,21 @@ spring.datasource.password=<your password>
 
 ### Build front and back-end 
 ```
-mvn install
+$mvn install
 ```
 
 ### Start bundled application
 ```
-java -jar target/demo-0.0.1-SNAPSHOT.jar 
+$java -jar target/demo-0.0.1-SNAPSHOT.jar 
 ```
 
 ### Run back-end
 ```
-mvn spring-boot:run
+$mvn spring-boot:run
 ```
 
 ### Run front-end
 ```
-cd client
-yarn run serve
+$cd client
+$yarn run serve
 ```
